@@ -1,4 +1,8 @@
 load("@llvm-project//mlir:tblgen.bzl", "gentbl_cc_library")
+load(
+    "@local_tsl//tsl/platform:build_config.bzl",
+    "tf_proto_library",
+)
 load("//tensorflow:tensorflow.bzl", "if_google", "tf_cc_test")
 
 package(
@@ -125,6 +129,7 @@ cc_library(
     srcs = ["tf2hlo.cc"],
     hdrs = ["tf2hlo.h"],
     deps = [
+        ":ifrt_compilation_proto_cc",
         ":ifrt_constants",
         ":ifrt_types",
         "//tensorflow/compiler/jit:xla_cpu_jit",
@@ -141,6 +146,7 @@ cc_library(
         "//tensorflow/core/protobuf/tpu:topology_proto_cc",
         "//tensorflow/core/tpu/kernels:tpu_compile_op_support",
         "//tensorflow/core/tpu/kernels/xla:host_compute_ops",
+        "//third_party/protobuf",
         "@com_google_absl//absl/log",
         "@com_google_absl//absl/log:check",
         "@com_google_absl//absl/status",
@@ -152,16 +158,20 @@ cc_library(
         "@llvm-project//mlir:IR",
         "@llvm-project//mlir:Pass",
         "@local_tsl//tsl/platform:errors",
+        "@local_tsl//tsl/platform:fingerprint",
         "@local_tsl//tsl/platform:statusor",
         "@local_xla//xla:shape_util",
         "@local_xla//xla:xla_data_proto_cc",
         "@local_xla//xla/client:client_library",
+        "@local_xla//xla/client:compile_only_client",
         "@local_xla//xla/hlo/translate/hlo_to_mhlo:hlo_to_mlir_hlo",
         "@local_xla//xla/pjrt:pjrt_compiler",
         "@local_xla//xla/python/ifrt",
         "@local_xla//xla/service:computation_placer_hdr",
+        "@local_xla//xla/service:hlo_proto_cc",
         "@local_xla//xla/service/llvm_ir:llvm_util",
         "@local_xla//xla/stream_executor",
+        "@local_xla//xla/tsl/concurrency:ref_count",
     ],
 )
 
@@ -290,5 +300,16 @@ tf_cc_test(
         "@local_xla//xla/python/pjrt_ifrt:tfrt_cpu_client_test_lib",
         "@local_xla//xla/tsl/framework/test_util:mock_serving_device_selector",
         "@tf_runtime//:hostcontext",
+    ],
+)
+
+tf_proto_library(
+    name = "ifrt_compilation_proto",
+    srcs = ["ifrt_compilation.proto"],
+    protodeps = [
+        "//tensorflow/compiler/tf2xla:host_compute_metadata_proto",
+        "@local_xla//xla/service:hlo_proto",
+        "//tensorflow/core:protos_all",
+        "//tensorflow/core/protobuf/tpu:compile_metadata_proto",
     ],
 )

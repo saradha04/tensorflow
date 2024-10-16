@@ -107,9 +107,15 @@ TEST(Tf2HloTest, Empty) {
       GetCompileMetadata(mlir_module.get(), *client));
   TF_ASSERT_OK(UpdateCompileMetadata(compile_metadata, {}));
 
-  auto result =
-      CompileTfToHlo(mlir_module.get(), {}, "main", *client, compile_metadata,
-                     tensorflow::IdentityShapeRepresentationFn());
+  Tf2HloArg arg{
+      .module = mlir_module.get(),
+      .input_dtypes_and_shapes = {},
+      .entry_function_name = "main",
+      .compile_metadata = compile_metadata,
+      .shape_representation_fn = tensorflow::IdentityShapeRepresentationFn(),
+      .platform_name = client->platform_name(),
+  };
+  auto result = CompileTfToHlo(arg);
 
   TF_ASSERT_OK(result.status());
 }
@@ -146,9 +152,16 @@ TEST(Tf2HloTest, Tuple) {
       GetCompileMetadata(mlir_module.get(), *client));
   TF_ASSERT_OK(UpdateCompileMetadata(compile_metadata, dtype_and_shapes));
 
-  auto result = CompileTfToHlo(mlir_module.get(), dtype_and_shapes, "main",
-                               *client, compile_metadata,
-                               tensorflow::IdentityShapeRepresentationFn());
+  Tf2HloArg arg{
+      .module = mlir_module.get(),
+      .input_dtypes_and_shapes = dtype_and_shapes,
+      .entry_function_name = "main",
+      .compile_metadata = compile_metadata,
+      .shape_representation_fn = tensorflow::IdentityShapeRepresentationFn(),
+      .platform_name = client->platform_name(),
+  };
+
+  auto result = CompileTfToHlo(arg);
 
   TF_ASSERT_OK(result.status());
 }
@@ -184,9 +197,16 @@ TEST(Tf2HloTest, Spmd) {
       GetCompileMetadata(mlir_module.get(), *client));
   TF_ASSERT_OK(UpdateCompileMetadata(compile_metadata, dtype_and_shapes));
 
-  auto result = CompileTfToHlo(mlir_module.get(), dtype_and_shapes, "main",
-                               *client, compile_metadata,
-                               tensorflow::IdentityShapeRepresentationFn());
+  Tf2HloArg arg{
+      .module = mlir_module.get(),
+      .input_dtypes_and_shapes = dtype_and_shapes,
+      .entry_function_name = "main",
+      .compile_metadata = compile_metadata,
+      .shape_representation_fn = tensorflow::IdentityShapeRepresentationFn(),
+      .platform_name = client->platform_name(),
+  };
+
+  auto result = CompileTfToHlo(arg);
 
   LOG(INFO) << result->compile_metadata;
   TF_ASSERT_OK(result.status());
@@ -260,9 +280,16 @@ TEST(Tf2HloTest, UsingDefaultDeviceAssignment) {
       GetCompileMetadata(mlir_module.get(), *client));
   TF_ASSERT_OK(UpdateCompileMetadata(compile_metadata, dtype_and_shapes));
 
-  auto result = CompileTfToHlo(mlir_module.get(), dtype_and_shapes, "main",
-                               *client, compile_metadata,
-                               tensorflow::IdentityShapeRepresentationFn());
+  Tf2HloArg arg{
+      .module = mlir_module.get(),
+      .input_dtypes_and_shapes = dtype_and_shapes,
+      .entry_function_name = "main",
+      .compile_metadata = compile_metadata,
+      .shape_representation_fn = tensorflow::IdentityShapeRepresentationFn(),
+      .platform_name = client->platform_name(),
+  };
+
+  auto result = CompileTfToHlo(arg);
 
   LOG(INFO) << result->compile_metadata;
   TF_ASSERT_OK(result.status());
@@ -361,9 +388,16 @@ TEST(Tf2HloTest, XlaCallHostCallback) {
       GetCompileMetadata(mlir_module.get(), *client));
   TF_ASSERT_OK(UpdateCompileMetadata(compile_metadata, dtype_and_shapes));
 
-  auto result = CompileTfToHlo(mlir_module.get(), dtype_and_shapes, "main",
-                               *client, compile_metadata,
-                               tensorflow::IdentityShapeRepresentationFn());
+  Tf2HloArg arg{
+      .module = mlir_module.get(),
+      .input_dtypes_and_shapes = dtype_and_shapes,
+      .entry_function_name = "main",
+      .compile_metadata = compile_metadata,
+      .shape_representation_fn = tensorflow::IdentityShapeRepresentationFn(),
+      .platform_name = client->platform_name(),
+  };
+
+  auto result = CompileTfToHlo(arg);
 
   TF_ASSERT_OK(result.status());
 
@@ -414,9 +448,16 @@ TEST(Tf2HloTest, GpuShouldFailWithWrongDeviceType) {
       GetCompileMetadata(mlir_module.get(), mock_client));
   TF_ASSERT_OK(UpdateCompileMetadata(compile_metadata, dtype_and_shapes));
 
-  auto result = CompileTfToHlo(mlir_module.get(), dtype_and_shapes, "main",
-                               mock_client, compile_metadata,
-                               tensorflow::IdentityShapeRepresentationFn());
+  Tf2HloArg arg{
+      .module = mlir_module.get(),
+      .input_dtypes_and_shapes = dtype_and_shapes,
+      .entry_function_name = "main",
+      .compile_metadata = compile_metadata,
+      .shape_representation_fn = tensorflow::IdentityShapeRepresentationFn(),
+      .platform_name = mock_client.platform_name(),
+  };
+
+  auto result = CompileTfToHlo(arg);
   EXPECT_THAT(result, StatusIs(absl::StatusCode::kUnimplemented,
                                HasSubstr("CUDA or ROCM build required")));
 }
