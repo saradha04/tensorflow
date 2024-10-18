@@ -25,11 +25,11 @@ limitations under the License.
 #include "xla/hlo/ir/hlo_instruction.h"
 #include "xla/hlo/ir/hlo_module.h"
 #include "xla/hlo/ir/hlo_opcode.h"
-#include "xla/service/all_gather_combiner.h"
 #include "xla/service/gpu/backend_configs.pb.h"
 #include "xla/service/gpu/gpu_collective_combiner_utils.h"
 #include "xla/service/gpu/gpu_hlo_schedule.h"
 #include "xla/service/hlo_domain_map.h"
+#include "xla/transforms/collectives/all_gather_combiner.h"
 #include "tsl/platform/statusor.h"
 
 namespace xla::gpu {

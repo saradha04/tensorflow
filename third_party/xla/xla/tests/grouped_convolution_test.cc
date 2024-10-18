@@ -20,14 +20,14 @@ limitations under the License.
 #include "absl/algorithm/container.h"
 #include "xla/execution_options_util.h"
 #include "xla/hlo/builder/xla_computation.h"
-#include "xla/service/despecializer.h"
-#include "xla/service/float_normalization.h"
 #include "xla/status_macros.h"
 #include "xla/test.h"
 #include "xla/tests/client_library_test_base.h"
 #include "xla/tests/hlo_test_base.h"
 #include "xla/tests/test_macros.h"
 #include "xla/tests/test_utils.h"
+#include "xla/transforms/despecializer.h"
+#include "xla/transforms/simplifiers/float_normalization.h"
 
 namespace xla {
 namespace {

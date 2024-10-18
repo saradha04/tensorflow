@@ -31,10 +31,10 @@ limitations under the License.
 #include "xla/service/gpu/transforms/variadic_op_splitter.h"
 #include "xla/service/hlo_cost_analysis.h"
 #include "xla/service/hlo_cse.h"
-#include "xla/service/hlo_dce.h"
 #include "xla/service/hlo_verifier.h"
 #include "xla/service/layout_assignment.h"
 #include "xla/stream_executor/device_description.h"
+#include "xla/transforms/simplifiers/hlo_dce.h"
 #include "xla/xla.pb.h"
 #include "tsl/platform/threadpool.h"
 

@@ -22,10 +22,10 @@ limitations under the License.
 #include "xla/hlo/ir/hlo_module.h"
 #include "xla/literal.h"
 #include "xla/literal_util.h"
-#include "xla/service/rng_bit_generator_expander.h"
-#include "xla/service/rng_expander.h"
 #include "xla/tests/hlo_test_base.h"
 #include "xla/tests/test_macros.h"
+#include "xla/transforms/expanders/rng_bit_generator_expander.h"
+#include "xla/transforms/expanders/rng_expander.h"
 #include "tsl/platform/statusor.h"
 #include "tsl/platform/test.h"
 

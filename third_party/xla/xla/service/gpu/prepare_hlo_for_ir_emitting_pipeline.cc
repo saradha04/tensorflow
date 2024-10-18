@@ -28,10 +28,10 @@ limitations under the License.
 #include "xla/service/gpu/transforms/horizontal_loop_fusion.h"
 #include "xla/service/gpu/transforms/sanitize_constant_names.h"
 #include "xla/service/hlo_dataflow_analysis.h"
-#include "xla/service/hlo_dce.h"
 #include "xla/service/hlo_verifier.h"
 #include "xla/service/layout_assignment.h"
 #include "xla/service/loop_schedule_linearizer.h"
+#include "xla/transforms/simplifiers/hlo_dce.h"
 #include "xla/xla.pb.h"
 
 namespace xla {

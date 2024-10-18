@@ -41,7 +41,6 @@ limitations under the License.
 #include "xla/hlo/pass/hlo_pass_pipeline.h"
 #include "xla/hlo/utils/hlo_query.h"
 #include "xla/primitive_util.h"
-#include "xla/service/float_normalization.h"
 #include "xla/service/gpu/backend_configs.pb.h"
 #include "xla/service/gpu/fusions/triton/triton_fusion_emitter.h"
 #include "xla/service/gpu/gpu_device_info_for_tests.h"
@@ -53,6 +52,7 @@ limitations under the License.
 #include "xla/tests/filecheck.h"
 #include "xla/tests/hlo_test_base.h"
 #include "xla/tests/verified_hlo_module.h"
+#include "xla/transforms/simplifiers/float_normalization.h"
 #include "tsl/platform/errors.h"
 #include "tsl/platform/statusor.h"
 

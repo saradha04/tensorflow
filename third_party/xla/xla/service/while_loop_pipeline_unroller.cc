@@ -32,9 +32,9 @@ limitations under the License.
 #include "xla/hlo/ir/hlo_module.h"
 #include "xla/hlo/ir/hlo_opcode.h"
 #include "xla/service/call_inliner.h"
-#include "xla/service/flatten_call_graph.h"
-#include "xla/service/hlo_dce.h"
 #include "xla/service/while_util.h"
+#include "xla/transforms/simplifiers/flatten_call_graph.h"
+#include "xla/transforms/simplifiers/hlo_dce.h"
 #include "tsl/platform/errors.h"
 #include "tsl/platform/statusor.h"
 

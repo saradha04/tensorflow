@@ -21,10 +21,10 @@ limitations under the License.
 #include "absl/strings/str_replace.h"
 #include "xla/hlo/utils/hlo_matchers.h"
 #include "xla/service/collective_ops_utils.h"
-#include "xla/service/despecializer.h"
 #include "xla/service/hlo_verifier.h"
 #include "xla/service/spmd/spmd_partitioner.h"
 #include "xla/tests/hlo_test_base.h"
+#include "xla/transforms/despecializer.h"
 #include "xla/tsl/lib/core/status_test_util.h"
 
 namespace xla {

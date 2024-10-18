@@ -20,11 +20,11 @@ limitations under the License.
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include "xla/hlo/ir/hlo_instruction.h"
-#include "xla/service/algebraic_simplifier.h"
 #include "xla/service/pattern_matcher.h"
 #include "xla/service/pattern_matcher_gmock.h"
 #include "xla/stream_executor/device_description.h"
 #include "xla/tests/hlo_test_base.h"
+#include "xla/transforms/simplifiers/algebraic_simplifier.h"
 #include "tsl/platform/statusor.h"
 
 namespace xla::gpu {

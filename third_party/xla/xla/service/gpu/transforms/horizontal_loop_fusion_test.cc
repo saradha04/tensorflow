@@ -31,7 +31,6 @@ limitations under the License.
 #include "xla/hlo/pass/hlo_pass_pipeline.h"
 #include "xla/service/gpu/gpu_device_info_for_tests.h"
 #include "xla/service/gpu/transforms/instruction_fusion.h"
-#include "xla/service/hlo_dce.h"
 #include "xla/service/pattern_matcher.h"
 #include "xla/service/pattern_matcher_gmock.h"
 #include "xla/shape.h"
@@ -39,6 +38,7 @@ limitations under the License.
 #include "xla/stream_executor/device_description.h"
 #include "xla/test.h"
 #include "xla/tests/hlo_test_base.h"
+#include "xla/transforms/simplifiers/hlo_dce.h"
 #include "xla/tsl/lib/core/status_test_util.h"
 
 namespace xla {

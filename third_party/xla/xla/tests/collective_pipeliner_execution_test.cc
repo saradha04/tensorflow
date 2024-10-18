@@ -29,8 +29,8 @@ limitations under the License.
 #include "xla/hlo/parser/hlo_parser.h"
 #include "xla/hlo/pass/hlo_pass_pipeline.h"
 #include "xla/service/collective_pipeliner.h"
-#include "xla/service/hlo_dce.h"
 #include "xla/tests/hlo_test_base.h"
+#include "xla/transforms/simplifiers/hlo_dce.h"
 #include "xla/util.h"
 
 namespace xla {

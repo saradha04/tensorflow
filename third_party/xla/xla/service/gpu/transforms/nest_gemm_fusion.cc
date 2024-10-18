@@ -46,8 +46,8 @@ limitations under the License.
 #include "xla/service/gpu/model/symbolic_tile_analysis.h"
 #include "xla/service/gpu/model/symbolic_tiled_hlo_instruction.h"
 #include "xla/service/gpu/model/tiled_hlo_computation.h"
-#include "xla/service/hlo_dce.h"
 #include "xla/service/instruction_fusion.h"
+#include "xla/transforms/simplifiers/hlo_dce.h"
 #include "tsl/platform/errors.h"
 #include "tsl/platform/statusor.h"
 
